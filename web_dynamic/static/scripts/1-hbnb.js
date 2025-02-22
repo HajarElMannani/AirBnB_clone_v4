@@ -17,6 +17,5 @@ $(document).ready(function () {
 		etc = '...';
 	}
 	$('.amenities h4').text(amenities + etc );
-
 });
 });
