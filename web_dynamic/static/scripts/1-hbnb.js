@@ -1,14 +1,22 @@
+/*{ $ }*/
 $(document).ready(function () {
-    $('li input').on('change', function () {
-	const dict_amenity = {};
-	if (this.checked) {
-//	    const dict_amenity = {};
-	    key = $('amenity_id').val();
-	    value = $('amenity_name').val();
-	    dict_amenity[key] = value;
+  const dict_amenity = {};
+  $('li input[type="checkbox"]').on('change', function () {	
+	if ($(this).is(':checked')) {
+	    dict_amenity[$(this).attr('data-id')] = $(this).attr('data-name');
 	} else {
-	    dict_amenity.remove();
+	    delete dict_amenity[$(this).attr('data-id')];
 		}
-	});
-    $('.amenities h4').append(dict_amenity);	    
+	let list_a = []
+	list_a = Object.values(dict_amenity);
+    let amenities = list_a.join(', ').slice(0, 30);
+	let etc;
+	if (amenities.length === list_a.join(', ').length) {
+		 etc = '';
+	} else { 
+		etc = '...';
+	}
+	$('.amenities h4').text(amenities + etc );
+
+});
 });
